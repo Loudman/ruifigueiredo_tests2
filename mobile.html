@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Our App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 400px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .loading {
+            display: none;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 0.5rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🚀</div>
+        <h1>Welcome!</h1>
+        <p>Opening your app experience...</p>
+        
+        <div class="loading" id="loading">
+            <span class="spinner"></span>
+            Redirecting to app...
+        </div>
+        
+        <a href="/deeplink" class="btn" id="openApp">Open in App</a>
+    </div>
+
+    <script>
+        // Deep linking logic
+        function attemptDeepLink() {
+            const loading = document.getElementById('loading');
+            const openAppBtn = document.getElementById('openApp');
+            
+            // Show loading state
+            loading.style.display = 'block';
+            openAppBtn.style.display = 'none';
+            
+            // Attempt to open the app
+            const deepLinkUrl = 'biosite://bio.site/oinfante'; // Replace with your actual deep link scheme
+            
+            // Try to open the app
+            window.location.href = deepLinkUrl;
+            
+            // Set a timeout to redirect to app store if app doesn't open
+            /*setTimeout(() => {
+                // If we're still here after 2 seconds, the app didn't open
+                // Redirect to app store
+                window.location.href = '/app-store';
+            }, 2000);*/
+        }
+        
+        // Auto-attempt deep link when page loads
+        window.addEventListener('load', () => {
+            // Small delay to ensure smooth transition
+            setTimeout(attemptDeepLink, 500);
+        });
+        
+        // Manual fallback button click
+        document.getElementById('openApp').addEventListener('click', (e) => {
+            e.preventDefault();
+            attemptDeepLink();
+        });
+    </script>
+</body>
+</html> 
