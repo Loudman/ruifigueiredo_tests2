@@ -1,20 +1,20 @@
 <html>
         <head>
                 <script>
-            function openApp() {
-              // Try opening the app
-                    try{
-                      window.location = "bios://bio.site/ruifigueiredo";
-                    }catch{
-                            console.log("bolas!");
-                    }
+            function tryOpenApp() {
+              var iframe = document.createElement("iframe");
+              iframe.style.display = "none";
+              iframe.src = "biosite://bio.site/oinfante";
+              document.body.appendChild(iframe);
+
+              // Clean up after a second
+              setTimeout(() => { document.body.removeChild(iframe); }, 1000);
             }
-            // Give the page a moment to load, then try
-            setTimeout(openApp, 500);
+            window.onload = tryOpenApp;
           </script>
         </head>
         <body>
-          <h1>Welcome to My App 3</h1>
+          <h1>Welcome to My App 4</h1>
           <p>If you have the app installed, it should open automatically.</p>
         </body>
       </html>
